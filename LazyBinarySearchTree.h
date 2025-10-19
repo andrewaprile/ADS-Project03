@@ -10,9 +10,9 @@ private:
 	int findMin(TreeNode*);
 	int findMax(TreeNode*);
 	bool contains(int key);
-	// string print();
-	int height();
-	int size();
+	string print(TreeNode*);
+	int height(TreeNode* node);
+	int size(TreeNode* node);
 
 public:
 	LazyBinarySearchTree();
@@ -23,7 +23,7 @@ public:
 	void remove(int);
 	int findMin();
 	int findMax();
-	// string print();
+	string print();
 	int height();
 	int size();
 };

@@ -37,4 +37,46 @@ int LazyBinarySearchTree::findMax(TreeNode* node){
 		return findMax(node->right);
 	}
 }
+int LazyBinarySearchTree::height(){
+	return height(root);
+}
+int LazyBinarySearchTree::height(TreeNode* node){
+	if (node==nullptr){
+		return -1;
+	}
+	else{
+		int leftHeight = height(node->left);
+		int rightHeight= height(node->right):
+		if (leftHeight > rightHeight){
+			return leftHeight + 1;
+		}
+		else{
+			return rightHeight + 1;
+		}
+	}
+	
+}
+int LazyBinarySearchTree::size(){
+	return size(root);
+}
+int LazyBinarySearchTree::size(TreeNode* node){
+	if (node==nullptr){
+		return 0;
+	}else{
+		return size(node->left) + size(node->right);
+	}
+}
+
+string LazyBinarySearchTree::print(){
+	return print(root);
+}
+string LazyBinarySearchTree::print(TreeNode* node){
+	if (node == nullptr){
+		return "";
+	}
+	else{
+		cout << node->key << " " << print(node->left) << " " << print(node->right);
+	}
+	return "";
+}
 
