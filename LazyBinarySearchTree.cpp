@@ -3,18 +3,30 @@
 using namespace std;
 #include "LazyBinarySearchTree.h"
 
+
 LazyBinarySearchTree::LazyBinarySearchTree() : root(nullptr) {}
 LazyBinarySearchTree::~LazyBinarySearchTree() {
-	while (root != nullptr){
-		// remove(root->key);	
+	clear(root);
+	root = nullptr;
+}
+void LazyBinarySearchTree::clear(TreeNode* node){
+	if (node != nullptr){
+		clear(node->left);
+		clear(node->right);
+		delete node;
 	}
 }
-bool LazyBinarySearchTree::insert(int key){
+
+void LazyBinarySearchTree::insert(ostream& out, int key){
+	if (key<1 || key>99){
+		out << "Error: insert (illegal argument: not in range)" << endl;
+	}
 	bool inserted = false;
 	root = insert(root, key, inserted);
-	return inserted;
+	out << boolalpha << inserted << endl;
 }
 TreeNode* LazyBinarySearchTree::insert(TreeNode* node, int key, bool& inserted){
+
 	if(node==nullptr){
 		inserted = true;
 		return new TreeNode(key);
@@ -29,15 +41,28 @@ TreeNode* LazyBinarySearchTree::insert(TreeNode* node, int key, bool& inserted){
 	return node;
 }
 
-// // bool LazyBinarySearchTree::remove(int key){
+void LazyBinarySearchTree::remove(ostream& out, int key){
+	bool removed = false;
+	root = remove(root, key, removed);
+	out << boolalpha << removed << endl;
+}
+TreeNode* LazyBinarySearchTree::remove(TreeNode* node, int key, bool& removed){
+	if (node==nullptr){
+		removed = false;
+		return nullptr;
+	} else if(key<node->key){
+		node->left = remove(node->left, key, removed);
+	} else if(key>node->key){
+		node->right = remove(node->right, key, removed);
+	} else if(key==node->key){
+		node->deleted = true;
+		removed = true;
+	}
+	return node;
+}
 
-// // }
-// // TreeNode* LazyBinarySearchTree::remove(TreeNode* node, int key){
-
-// }
-
-int LazyBinarySearchTree::findMin() {
-	return findMin(root);
+void LazyBinarySearchTree::findMin(ostream& out) {
+	out << findMin(root) << endl;
 }
 int LazyBinarySearchTree::findMin(TreeNode* node){
 	if (node == nullptr){
@@ -50,8 +75,8 @@ int LazyBinarySearchTree::findMin(TreeNode* node){
 	}
 }
 
-int LazyBinarySearchTree::findMax(){
-	return findMax(root);
+void LazyBinarySearchTree::findMax(ostream& out){
+	out << findMax(root) << endl;
 }
 int LazyBinarySearchTree::findMax(TreeNode* node){
 	if (node == nullptr || node->deleted == true){
@@ -64,9 +89,8 @@ int LazyBinarySearchTree::findMax(TreeNode* node){
 	}
 }
 
-bool LazyBinarySearchTree::contains(int key){
-	return contains(root, key);
-
+void LazyBinarySearchTree::contains(ostream& out, int key){
+	out << boolalpha << contains(root, key) << endl;
 }
 bool LazyBinarySearchTree::contains(TreeNode* node, int key){
 	if (node==nullptr){
@@ -78,21 +102,24 @@ bool LazyBinarySearchTree::contains(TreeNode* node, int key){
 	return contains(node->left, key) || contains(node->right, key);
 }
 
-void LazyBinarySearchTree::print(){
-	cout << print(root) << "\n";
+void LazyBinarySearchTree::print(ostream& out){
+	out << print(root) << endl;
 }
 string LazyBinarySearchTree::print(TreeNode* node){
 	if (node == nullptr){
-		return "nullptr";
+		return "";
 	}
 	else{
-		return to_string(node->key) + " " + print(node->left) + " " + print(node->right);
+		if (node->deleted == true){
+			return "*" + to_string(node->key) + " " + print(node->left) + " " + print(node->right);
+		} else {
+			return to_string(node->key) + " " + print(node->left) + " " + print(node->right);
+		}
 	}
-	cout << "print end"<< endl;
 }
 
-int LazyBinarySearchTree::height(){
-	return height(root);
+void LazyBinarySearchTree::height(ostream& out){
+	out << height(root) << endl;
 }
 int LazyBinarySearchTree::height(TreeNode* node){
 	if (node==nullptr){
@@ -109,8 +136,8 @@ int LazyBinarySearchTree::height(TreeNode* node){
 	}
 }
 
-int LazyBinarySearchTree::size(){
-	return size(root);
+void LazyBinarySearchTree::size(ostream& out){
+	out << size(root) << endl;
 }
 int LazyBinarySearchTree::size(TreeNode* node){
 	if (node==nullptr){
@@ -118,5 +145,4 @@ int LazyBinarySearchTree::size(TreeNode* node){
 	}else{
 		return size(node->left) + size(node->right) + 1;
 	}
-	cout << "size end"<< endl;
 }

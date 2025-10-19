@@ -6,24 +6,25 @@ class LazyBinarySearchTree {
 private:
 	TreeNode* root;
 	TreeNode* insert(TreeNode*, int, bool&);
-	TreeNode* remove(TreeNode*, int);
+	TreeNode* remove(TreeNode*, int, bool&);
 	int findMin(TreeNode*);
 	int findMax(TreeNode*);
 	bool contains(TreeNode*,int);
 	string print(TreeNode*);
 	int height(TreeNode*);
 	int size(TreeNode*);
+	void clear(TreeNode*);
 
 public:
 	LazyBinarySearchTree();
 	~LazyBinarySearchTree();
 
-	bool insert(int);
-	bool remove(int);
-	int findMin();
-	int findMax();
-	bool contains(int);
-	void print();
-	int height();
-	int size();
+	void insert(ostream&, int);
+	void remove(ostream&, int);
+	void findMin(ostream&);
+	void findMax(ostream&);
+	void contains(ostream&, int);
+	void print(ostream&);
+	void height(ostream&);
+	void size(ostream&);
 };

@@ -11,4 +11,4 @@ p03.o: p03.cpp LazyBinarySearchTree.h
 	g++ -c p03.cpp
 
 clean:
-	rm -f *.o *.exe
+	rm -f *.o *.exe *output.dat

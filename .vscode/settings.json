@@ -2,6 +2,12 @@
 	"files.associations": {
 		"xutility": "cpp",
 		"xstring": "cpp",
-		"iostream": "cpp"
+		"iostream": "cpp",
+		"string": "cpp",
+		"vector": "cpp",
+		"ios": "cpp",
+		"ostream": "cpp",
+		"xiosbase": "cpp",
+		"iosfwd": "cpp"
 	}
 }
