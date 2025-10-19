@@ -5,25 +5,25 @@
 class LazyBinarySearchTree {
 private:
 	TreeNode* root;
-	bool insert(TreeNode*, int);
-	bool remove(TreeNode*, int);
+	TreeNode* insert(TreeNode*, int, bool&);
+	TreeNode* remove(TreeNode*, int);
 	int findMin(TreeNode*);
 	int findMax(TreeNode*);
-	bool contains(int key);
+	bool contains(TreeNode*,int);
 	string print(TreeNode*);
-	int height(TreeNode* node);
-	int size(TreeNode* node);
+	int height(TreeNode*);
+	int size(TreeNode*);
 
 public:
 	LazyBinarySearchTree();
 	~LazyBinarySearchTree();
 
-	// Public interface methods
-	void insert(int);
-	void remove(int);
+	bool insert(int);
+	bool remove(int);
 	int findMin();
 	int findMax();
-	string print();
+	bool contains(int);
+	void print();
 	int height();
 	int size();
 };
