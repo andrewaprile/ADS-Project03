@@ -36,7 +36,53 @@ Let's say we are trying to find the **max** (min would simply be the opposite):
 
 Here is the findMax function, notice how we go to the right-subtrees recursively first, then check the node, if a vaild value isn't found there, it will search the left-subtrees after.
 
-![](blob:vscode-webview://1f0haj087p7h49n8h1suuald95pg7e4544pdvomcg9phbcim38vj/c81a4268-7dac-4f95-8bba-30d98b3de501) 
+int LazyBinarySearchTree::findMax(TreeNode *node)
+
+{
+
+    if (node == nullptr)
+
+    {
+
+        return -1;
+
+    }
+
+  
+
+    // right search
+
+    int rightMax = findMax(node->right);
+
+  
+
+    if (rightMax != -1)
+
+    {
+
+        return rightMax;
+
+    }
+
+  
+
+    // true case : where we find true max
+
+    if (!node->deleted)
+
+    {
+
+        return node->key;
+
+    }
+
+  
+
+    // left search
+
+    return findMax(node->left);
+
+}
 
 #### Code Execution
 
@@ -63,8 +109,28 @@ and this should execute the code with the input.dat file as a parameter and nami
 
 Here is the desired output so you can check that the code ran correctly.
 
-----------------------------------------------------
+---------------------------------------------------
 
-![](blob:vscode-webview://1f0haj087p7h49n8h1suuald95pg7e4544pdvomcg9phbcim38vj/9529cee6-99b0-4d60-ab93-e08f19f2956f) 
+true  
+true  
+true  
+true  
+98 67 55 45     
+false  
+true  
+false  
+55  
+98  
+98 67 55 *45     
+3  
+4  
+true  
+true  
+false  
+98 67 55 *45 32    84   
+32  
+Error: insert (illegal argument: not in range)  
+Error: insert (no key)  
+Error: hiha (invalid command
 
-----------------------------------------------------
+---------------------------------------------------
